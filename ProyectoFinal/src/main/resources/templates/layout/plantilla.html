@@ -13,12 +13,32 @@
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
         <script th:src="@{/webjars/bootstrap-icons/bootstrap.min.js}"></script>
     </head>
-    <header th:fragment="header">
-        <nav>
-            
-        </nav>
-    </header>
     <body>
+        <header th:fragment="header" class="header">
+            <nav class="navbar navbar-expand-sm navbar-light p-3" style="background-color: #3B424B;">
+                <div class="container">
+                    <a th:href="@{/}" class="navbar-brand text-white px-10">SuperUfide</a>
+                    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <ul class="navbar-nav">
+                            <li class="nav-item px-5"><a  class="nav-link text-white" th:href="@{/categoria/listado}">Inicio</a>
+                            </li>
+                            <li class="nav-item px-5"><a class="nav-link text-white" th:href="@{/producto/listado}">Carrito</a>
+                            </li>
+                            <li class="nav-item dropdown" sec:autorize='hasRole("ROLE_AMIN")'>
+                                <a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" role="button"
+                                   aria-expanded="false">Secciones</a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item" th:href="@{/productos/listado}">?</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
         <footer th:fragment="footer" class="text-center text-lg-start" style="background-color: black;">
             <div class="container d-flex justify-content-center py-5">
                 <button type="button" class="btn btn-primary btn-lg btn-floating mx-2" style="background-color: white;">
