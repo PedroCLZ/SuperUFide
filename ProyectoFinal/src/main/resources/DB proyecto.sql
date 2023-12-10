@@ -4,7 +4,7 @@ CREATE SCHEMA superufide ;
 
 create user 'usuario_cliente'@'%' identified by 'Usuar1o_cliente';
 
-grant all privileges on techshop.* to 'usuario_cliente'@'%';
+grant all privileges on superufide.* to 'usuario_cliente'@'%';
 flush privileges;
 
 
@@ -21,7 +21,7 @@ create table superufide.producto (
   id_producto INT NOT NULL AUTO_INCREMENT,
   id_categoria INT NOT NULL,
   descripcion VARCHAR(100) NOT NULL,  
-  detalle VARCHAR(1600) NOT NULL, 
+  cantidad VARCHAR(1600) NOT NULL, 
   precio double, 
   ruta_imagen varchar(1024),
   activo bool,
@@ -48,16 +48,46 @@ DEFAULT CHARACTER SET = utf8mb4;
 
 create table superufide.rol (
   id_rol INT NOT NULL AUTO_INCREMENT,
-  nombre varchar(20) NOT NULL,
-  PRIMARY KEY (id_rol)
-  )
+  nombre varchar(20),
+  id_usuario int,
+  PRIMARY KEY (id_rol),
+  foreign key fk_rol_usuario (id_usuario) references usuario(id_usuario)
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
+
+create table superufide.factura (
+  id_factura INT NOT NULL AUTO_INCREMENT,
+  id_usuario INT NOT NULL,
+  fecha date,  
+  total double,
+  estado int,
+  PRIMARY KEY (id_factura),
+  foreign key fk_factura_usuario (id_usuario) references usuario(id_usuario)  
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+create table superufide.venta (
+  id_venta INT NOT NULL AUTO_INCREMENT,
+  id_factura INT NOT NULL,
+  id_producto INT NOT NULL,
+  precio double, 
+  cantidad int,
+  PRIMARY KEY (id_venta),
+  foreign key fk_ventas_factura (id_factura) references factura(id_factura),
+  foreign key fk_ventas_producto (id_producto) references producto(id_producto) 
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4;
+
+
 
 INSERT INTO superufide.usuario (id_usuario, username,password,nombre, apellidos, correo, telefono,ruta_imagen,activo) VALUES 
 (1,'Emilio05','$2a$10$P1','Emilio', 'Rodriguez Quiros','EmiRoQ@gmail.com','4556-8978', 'https://th.bing.com/th/id/R.1ca4ed91cae8c867996c5c3ad22f249c?rik=DTkbwGDQqyorng&riu=http%3a%2f%2fwww3.pictures.zimbio.com%2fgi%2fOKI%2bOpen%2bde%2bEspana%2bSenior%2bCleveland%2bGolf%2bSrixon%2bT-6DQQGLQjbx.jpg&ehk=M2Q5RBuNqpGOowI9OxoTgOC%2fsQ%2btzoZmaPDsZW3RGhc%3d&risl=&pid=ImgRaw&r=0',true),
 (2,'AnaCL','CJ0lQRi','Ana',  'Acu;a Lopez', 'NanaLopz@gmail.com', '5456-8789','https://th.bing.com/th/id/R.76bd08bd91f46adb1bbd3d45d6a5f605?rik=3LotKAsQJe%2flrQ&pid=ImgRaw&r=0',true),
-(3,'Catalina87','qXnPbO','Catalina', 'Chamoro Trejos','CataTreCha@gmail.com','7898-8936','https://th.bing.com/th/id/OIP.afCJk0EuMjerIFYa_BkdZgAAAA?rs=1&pid=ImgDetMain',true);
+(3,'Catalina87','qXnPbO','Catalina', 'Chamoro Trejos','CataTreCha@gmail.com','7898-8936','https://th.bing.com/th/id/OIP.afCJk0EuMjerIFYa_BkdZgAAAA?rs=1&pid=ImgDetMain',true),
+(4,'Fran','$2a$10$P1.w58XvnaYQUQgZUCk4aO/RTRl8EValluCqB3S2VMLTbRt.tlre.','Fran', 'Rodriguez Saborio', 'franrs200309@gmail.com', '4556-8978', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Juan_Diego_Madrigal.jpg/250px-Juan_Diego_Madrigal.jpg',true);
 
 
 INSERT INTO superufide.categoria (id_categoria, descripcion, ruta_imagen,activo) VALUES 
@@ -67,7 +97,7 @@ INSERT INTO superufide.categoria (id_categoria, descripcion, ruta_imagen,activo)
 ('4','Embutidos','https://th.bing.com/th/id/OIP.wVC6icsyBuSJggEIyriMpQHaFP?rs=1&pid=ImgDetMain',    true);
 
 
-INSERT INTO superufide.producto (id_producto, id_categoria, descripcion, detalle, precio, ruta_imagen, activo) VALUES
+INSERT INTO superufide.producto (id_producto, id_categoria, descripcion, cantidad, precio, ruta_imagen, activo) VALUES
 ('1','1','Bebida 1','Lorem ipsum dolor sit amet consectetur adipiscing elit iaculis, ullamcorper in fringilla eu cras tempor mi. Luctus blandit sapien mauris vestibulum consequat mattis taciti aliquam ullamcorper, sagittis suscipit etiam urna convallis.','23000','https://th.bing.com/th/id/OIP.bvGzgJg2VKOiwY2BsZO0ogAAAA?rs=1&pid=ImgDetMain',true),
 ('2','1','Bebida 2','Quisque in ridiculus scelerisque platea accumsan libero sem vel, mi cras metus cubilia tempor conubia fermentum volutpat gravida, maecenas semper sodales potenti turpis enim dapibus. Volutpat accumsan vivamus dignissim blandit vel ','27000','https://th.bing.com/th/id/OIP.bvGzgJg2VKOiwY2BsZO0ogAAAA?rs=1&pid=ImgDetMain',true),
 ('3','1','Bebida 3','Natoque lacinia accumsan hendrerit pretium sociis imperdiet a, nullam ornare erat suspendisse praesent porta, euismod in augue tempus aliquet habitasse. Non accumsan nostra cras vestibulum augue facilisi auctor scelerisque suscipit.','24000','https://th.bing.com/th/id/OIP.bvGzgJg2VKOiwY2BsZO0ogAAAA?rs=1&pid=ImgDetMain',true),
@@ -84,3 +114,9 @@ INSERT INTO superufide.producto (id_producto, id_categoria, descripcion, detalle
 ('14','4','Embutidos 3','Luctus lacus montes vulputate libero purus est litora, risus magnis quisque ac urna magna sollicitudin, suspendisse mauris massa euismod quam placerat. Facilisis congue id posuere tortor et porttitor curabitur pulvinar sapien, cubilia tempus pharetra.','154000','https://th.bing.com/th/id/OIP.wVC6icsyBuSJggEIyriMpQHaFP?rs=1&pid=ImgDetMain',true),
 ('15','4','Embutidos 3','Nullam porttitor vivamus phasellus tempus in morbi aliquet platea duis, nulla tristique inceptos pellentesque pulvinar congue sagittis euismod vitae lacinia, scelerisque mus orci sociosqu libero proin sed felis. Pretium tincidunt ultrices eu vel nam.','330000','https://th.bing.com/th/id/OIP.wVC6icsyBuSJggEIyriMpQHaFP?rs=1&pid=ImgDetMain',true),
 ('16','4','Embutidos 4','Litora metus senectus mattis egestas mus fames tempus suscipit, inceptos luctus hendrerit congue quis sem. Potenti quis conubia fermentum non dictum nibh, viverra neque sed pretium eros aptent, metus hac at imperdiet est. Accumsan donec sociosqu.','273000','https://th.bing.com/th/id/OIP.wVC6icsyBuSJggEIyriMpQHaFP?rs=1&pid=ImgDetMain',true);
+
+
+INSERT INTO superufide.rol (id_rol, nombre, id_usuario) values
+ (1,'ROLE_ADMIN',4), (2,'ROLE_VENDEDOR',1), (3,'ROLE_USER',1),
+ (4,'ROLE_VENDEDOR',2), (5,'ROLE_USER',2),
+ (6,'ROLE_USER',3);

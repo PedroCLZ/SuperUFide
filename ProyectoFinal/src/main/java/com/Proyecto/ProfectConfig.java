@@ -27,7 +27,7 @@ public class ProfectConfig implements WebMvcConfigurer {
         http
                 .authorizeHttpRequests((request) -> request
                 .requestMatchers("/", "/index", "/errores/**",
-                        "/carrito/**", "/pruebas/**", "/reportes/**",
+                        "/carrito/**", "/categoria/**",
                         "/registro/**", "/js/**", "/webjars/**")
                 .permitAll()
                 .requestMatchers(
@@ -36,8 +36,7 @@ public class ProfectConfig implements WebMvcConfigurer {
                         "/categoria/nuevo", "/categoria/guardar",
                         "/categoria/modificar/**", "/categoria/eliminar/**",
                         "/usuario/nuevo", "/usuario/guardar",
-                        "/usuario/modificar/**", "/usuario/eliminar/**",
-                        "/reportes/**"
+                        "/usuario/modificar/**", "/usuario/eliminar/**"
                 ).hasRole("ADMIN")
                 .requestMatchers(
                         "/producto/listado",
