@@ -21,18 +21,10 @@ public class Producto implements Serializable {
     private double precio;
     private int cantidad;
     private String rutaImagen;
-    private Boolean activo;
+    private boolean activo;
 
-    public Producto() {
-    }
-
-    public Producto(String descripcion, Boolean activo) {
-        this.descripcion = descripcion;
-        this.activo = activo;
-    }
-
-    public boolean isActivo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    @ManyToOne
+    @JoinColumn(name = "id_categoria")
+    private Categoria categoria;
 
 }
