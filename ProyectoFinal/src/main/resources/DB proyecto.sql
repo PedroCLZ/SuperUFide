@@ -21,7 +21,7 @@ create table superufide.producto (
   id_producto INT NOT NULL AUTO_INCREMENT,
   id_categoria INT NOT NULL,
   descripcion VARCHAR(100) NOT NULL,  
-  cantidad VARCHAR(1600) NOT NULL, 
+  cantidad INT NOT NULL, 
   precio double, 
   ruta_imagen varchar(1024),
   activo bool,
@@ -98,23 +98,21 @@ INSERT INTO superufide.categoria (id_categoria, descripcion, ruta_imagen,activo)
 
 
 INSERT INTO superufide.producto (id_producto, id_categoria, descripcion, cantidad, precio, ruta_imagen, activo) VALUES
-('1','1','Bebida 1','Lorem ipsum dolor sit amet consectetur adipiscing elit iaculis, ullamcorper in fringilla eu cras tempor mi. Luctus blandit sapien mauris vestibulum consequat mattis taciti aliquam ullamcorper, sagittis suscipit etiam urna convallis.','23000','https://th.bing.com/th/id/OIP.bvGzgJg2VKOiwY2BsZO0ogAAAA?rs=1&pid=ImgDetMain',true),
-('2','1','Bebida 2','Quisque in ridiculus scelerisque platea accumsan libero sem vel, mi cras metus cubilia tempor conubia fermentum volutpat gravida, maecenas semper sodales potenti turpis enim dapibus. Volutpat accumsan vivamus dignissim blandit vel ','27000','https://th.bing.com/th/id/OIP.bvGzgJg2VKOiwY2BsZO0ogAAAA?rs=1&pid=ImgDetMain',true),
-('3','1','Bebida 3','Natoque lacinia accumsan hendrerit pretium sociis imperdiet a, nullam ornare erat suspendisse praesent porta, euismod in augue tempus aliquet habitasse. Non accumsan nostra cras vestibulum augue facilisi auctor scelerisque suscipit.','24000','https://th.bing.com/th/id/OIP.bvGzgJg2VKOiwY2BsZO0ogAAAA?rs=1&pid=ImgDetMain',true),
-('4','1','bebida 4','Elementum sagittis dictumst leo curabitur porta, pellentesque interdum mauris class augue, penatibus vulputate dignissim lobortis, risus euismod ullamcorper ultrices. Hac suspendisse id odio tempus eleifend a malesuada, conubia gravida.','27600','https://th.bing.com/th/id/OIP.bvGzgJg2VKOiwY2BsZO0ogAAAA?rs=1&pid=ImgDetMain',true),
-('5','2','Abarrote 1','Aenean senectus diam vitae curae habitant risus a et netus ante, sociis metus quisque euismod aptent etiam platea fringilla class vestibulum, dis habitasse facilisis fusce varius nam arcu blandit congue. Rutrum placerat congue etiam .','45000','https://th.bing.com/th/id/R.083b514854104256af44a1b62e24a964?rik=Zrfbh3Dkg6A4vw&pid=ImgRaw&r=0',true),
-('6','2','Abarrote 2','Auctor id morbi tempor litora fusce potenti, ornare integer imperdiet turpis accumsan enim, sagittis suscipit purus lacus nunc. Posuere tellus elementum imperdiet sollicitudin consequat torquent urna risus, pulvinar ac per quis egestas.','57000','https://th.bing.com/th/id/R.083b514854104256af44a1b62e24a964?rik=Zrfbh3Dkg6A4vw&pid=ImgRaw&r=0',true),
-('7','2','Abarrote 3','Cum placerat etiam lobortis curabitur fames class facilisi hac duis, congue vulputate mus feugiat nostra imperdiet neque vehicula. Mi mollis ridiculus montes aenean sagittis vitae metus, netus massa ligula sociis magnis porttitor, torquent.','25000','https://th.bing.com/th/id/R.083b514854104256af44a1b62e24a964?rik=Zrfbh3Dkg6A4vw&pid=ImgRaw&r=0',true),
-('8','2','Abarrote 4','Purus dictumst scelerisque mollis platea malesuada per vehicula lectus blandit sed, vulputate morbi imperdiet duis dapibus congue class accumsan nullam, ligula eleifend tincidunt urna mi condimentum dis posuere tellus. Sem rutrum erat mauris .','27600','https://th.bing.com/th/id/R.083b514854104256af44a1b62e24a964?rik=Zrfbh3Dkg6A4vw&pid=ImgRaw&r=0',true),
-('9','3','Higiene y Belleza 1','Morbi egestas sociis magnis curabitur suscipit nostra blandit magna torquent convallis, enim parturient feugiat fringilla litora aliquam turpis nisl at velit, fames aenean dui viverra arcu habitasse nascetur platea ac. Lectus nibh imperdiet .','15780','https://th.bing.com/th/id/R.cdcf48b45f29f5496dfeacf958107e71?rik=JLcLMWgB4HnVVQ&pid=ImgRaw&r=0',true),
-('10','3','Higiene y Belleza 2','Rhoncus ante magna cursus consequat proin senectus ridiculus, varius maecenas tellus justo facilisi ligula eros dapibus, taciti sollicitudin vulputate vivamus lacus fusce. Lacus aptent facilisi urna volutpat vestibulum nunc sociis viverra habitasse.','15000','https://th.bing.com/th/id/R.cdcf48b45f29f5496dfeacf958107e71?rik=JLcLMWgB4HnVVQ&pid=ImgRaw&r=0',true),
-('11','3','Higiene y Belleza 3','Primis quis sollicitudin ac himenaeos dui metus ridiculus, viverra vitae erat litora mauris eget, ut nisl platea feugiat inceptos cum. Diam vitae sem nulla commodo hendrerit duis dictum, tristique senectus maecenas eu augue dignissim lectus, eros cursus.','25400','https://th.bing.com/th/id/R.cdcf48b45f29f5496dfeacf958107e71?rik=JLcLMWgB4HnVVQ&pid=ImgRaw&r=0',true),
-('12','3','Higiene y Belleza 4','Risus tristique donec faucibus cursus dictumst vestibulum maecenas, ac scelerisque luctus purus senectus quisque pellentesque, dictum commodo accumsan himenaeos placerat suscipit. Pharetra erat cubilia sapien feugiat aenean molestie vulputate ac, lectus.','45000','https://th.bing.com/th/id/R.cdcf48b45f29f5496dfeacf958107e71?rik=JLcLMWgB4HnVVQ&pid=ImgRaw&r=0',true),
-('13','4','Embutidos 1','Nam ad hac curae mollis dui scelerisque convallis eros, dignissim faucibus velit nostra dapibus cursus vehicula habitasse facilisi, mi conubia pellentesque quisque cras justo inceptos. Integer varius consequat volutpat at dui scelerisque dapibus magnis platea.','285000','https://th.bing.com/th/id/OIP.wVC6icsyBuSJggEIyriMpQHaFP?rs=1&pid=ImgDetMain',true),
-('14','4','Embutidos 3','Luctus lacus montes vulputate libero purus est litora, risus magnis quisque ac urna magna sollicitudin, suspendisse mauris massa euismod quam placerat. Facilisis congue id posuere tortor et porttitor curabitur pulvinar sapien, cubilia tempus pharetra.','154000','https://th.bing.com/th/id/OIP.wVC6icsyBuSJggEIyriMpQHaFP?rs=1&pid=ImgDetMain',true),
-('15','4','Embutidos 3','Nullam porttitor vivamus phasellus tempus in morbi aliquet platea duis, nulla tristique inceptos pellentesque pulvinar congue sagittis euismod vitae lacinia, scelerisque mus orci sociosqu libero proin sed felis. Pretium tincidunt ultrices eu vel nam.','330000','https://th.bing.com/th/id/OIP.wVC6icsyBuSJggEIyriMpQHaFP?rs=1&pid=ImgDetMain',true),
-('16','4','Embutidos 4','Litora metus senectus mattis egestas mus fames tempus suscipit, inceptos luctus hendrerit congue quis sem. Potenti quis conubia fermentum non dictum nibh, viverra neque sed pretium eros aptent, metus hac at imperdiet est. Accumsan donec sociosqu.','273000','https://th.bing.com/th/id/OIP.wVC6icsyBuSJggEIyriMpQHaFP?rs=1&pid=ImgDetMain',true);
-
+('1','1','Bebida 1','1','23000','https://th.bing.com/th/id/OIP.bvGzgJg2VKOiwY2BsZO0ogAAAA?rs=1&pid=ImgDetMain',true),
+('2','1','Bebida 2','21','27000','https://th.bing.com/th/id/OIP.bvGzgJg2VKOiwY2BsZO0ogAAAA?rs=1&pid=ImgDetMain',true),
+('3','1','Bebida 3','2','24000','https://th.bing.com/th/id/OIP.bvGzgJg2VKOiwY2BsZO0ogAAAA?rs=1&pid=ImgDetMain',true),
+('4','1','bebida 4','4','27600','https://th.bing.com/th/id/OIP.bvGzgJg2VKOiwY2BsZO0ogAAAA?rs=1&pid=ImgDetMain',true),
+('5','2','Abarrote 1','6','45000','https://th.bing.com/th/id/R.083b514854104256af44a1b62e24a964?rik=Zrfbh3Dkg6A4vw&pid=ImgRaw&r=0',true),
+('6','2','Abarrote 2','33','57000','https://th.bing.com/th/id/R.083b514854104256af44a1b62e24a964?rik=Zrfbh3Dkg6A4vw&pid=ImgRaw&r=0',true),
+('7','2','Abarrote 3','3','25000','https://th.bing.com/th/id/R.083b514854104256af44a1b62e24a964?rik=Zrfbh3Dkg6A4vw&pid=ImgRaw&r=0',true),
+('8','2','Abarrote 4','43','27600','https://th.bing.com/th/id/R.083b514854104256af44a1b62e24a964?rik=Zrfbh3Dkg6A4vw&pid=ImgRaw&r=0',true),
+('9','3','Higiene y Belleza 1','5','15780','https://th.bing.com/th/id/R.cdcf48b45f29f5496dfeacf958107e71?rik=JLcLMWgB4HnVVQ&pid=ImgRaw&r=0',true),
+('10','3','Higiene y Belleza 2','89','15000','https://th.bing.com/th/id/R.cdcf48b45f29f5496dfeacf958107e71?rik=JLcLMWgB4HnVVQ&pid=ImgRaw&r=0',true),
+('11','3','Higiene y Belleza 3','7','25400','https://th.bing.com/th/id/R.cdcf48b45f29f5496dfeacf958107e71?rik=JLcLMWgB4HnVVQ&pid=ImgRaw&r=0',true),
+('12','3','Higiene y Belleza 4','34','45000','https://th.bing.com/th/id/R.cdcf48b45f29f5496dfeacf958107e71?rik=JLcLMWgB4HnVVQ&pid=ImgRaw&r=0',true),
+('13','4','Embutidos 1','4','285000','https://th.bing.com/th/id/OIP.wVC6icsyBuSJggEIyriMpQHaFP?rs=1&pid=ImgDetMain',true),
+('14','4','Embutidos 3','8','154000','https://th.bing.com/th/id/OIP.wVC6icsyBuSJggEIyriMpQHaFP?rs=1&pid=ImgDetMain',true),
+('15','4','Embutidos 3','5','330000','https://th.bing.com/th/id/OIP.wVC6icsyBuSJggEIyriMpQHaFP?rs=1&pid=ImgDetMain',true);
 
 INSERT INTO superufide.rol (id_rol, nombre, id_usuario) values
  (1,'ROLE_ADMIN',4), (2,'ROLE_VENDEDOR',1), (3,'ROLE_USER',1),

@@ -2,12 +2,15 @@ package com.Proyecto.controller;
 
 import com.Proyecto.domain.Categoria;
 import com.Proyecto.service.CategoriaService;
+import com.Proyecto.service.FirebaseStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/categoria")
@@ -23,8 +26,9 @@ public class CategoriaController {
         model.addAttribute("totalCategorias", categorias.size());
         return "/categoria/listado";
     }
+    
 
-    @GetMapping("/eliminar/{idCategoria}")
+    @GetMapping("/listado/{idCategoria}")
     public String eliminar(Categoria categoria) {
         categoriaService.delete(categoria);
         return "redirect:/categoria/listado";
@@ -37,8 +41,20 @@ public class CategoriaController {
         return "/categoria/modifica";
     }
 
+    @Autowired
+    private FirebaseStorageService firabaseStorageService;
+
     @PostMapping("/guardar")
-    public String guardar(Categoria categoria) {
+    public String guardar(Categoria categoria, @RequestParam("imagenFile")
+        MultipartFile imagenFile) {
+
+        if (!imagenFile.isEmpty()) {
+            categoriaService.save(categoria);
+            String ruta=firabaseStorageService.cargaImagen(imagenFile, 
+                    "categoria", categoria.getIdCategoria());
+            categoria.setRutaImagen(ruta);
+            }
+        
         categoriaService.save(categoria);
         return "redirect:/categoria/listado";
     }

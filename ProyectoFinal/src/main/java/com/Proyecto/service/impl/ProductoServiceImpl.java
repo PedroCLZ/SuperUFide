@@ -25,6 +25,7 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     //Se obtiene una producto segun el id pasado por parametro
+    @Transactional(readOnly=true)
     @Override
     public Producto getProducto(Producto producto) {
         return productoDao.findById(producto.getIdProducto()).orElse(null);

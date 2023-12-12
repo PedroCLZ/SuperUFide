@@ -1,15 +1,22 @@
 package com.Proyecto;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import java.util.Locale;
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @Configuration
 public class ProfectConfig implements WebMvcConfigurer {
@@ -20,6 +27,7 @@ public class ProfectConfig implements WebMvcConfigurer {
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/registro/nuevo").setViewName("/registro/nuevo");
+
     }
 
     @Bean
@@ -27,7 +35,7 @@ public class ProfectConfig implements WebMvcConfigurer {
         http
                 .authorizeHttpRequests((request) -> request
                 .requestMatchers("/", "/index", "/errores/**",
-                        "/carrito/**", "/categoria/**",
+                        "/carrito/**", "/categoria/**", "/producto/**",
                         "/registro/**", "/js/**", "/webjars/**")
                 .permitAll()
                 .requestMatchers(
@@ -39,7 +47,7 @@ public class ProfectConfig implements WebMvcConfigurer {
                         "/usuario/modificar/**", "/usuario/eliminar/**"
                 ).hasRole("ADMIN")
                 .requestMatchers(
-                        "/producto/listado",
+//                        "/producto/listado",
                         "/categoria/listado",
                         "/usuario/listado"
                 ).hasAnyRole("ADMIN", "VENDEDOR")
@@ -62,5 +70,44 @@ public class ProfectConfig implements WebMvcConfigurer {
         build
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(new BCryptPasswordEncoder());
+    }
+    
+    //Los siguientes métodos son utilizados para el de internacionalización
+    
+    /**
+    LocaleResolver ubica la informacion del browser local del usuario
+    y fija la información al desplegar
+     * @return 
+    */
+    @Bean
+    public LocaleResolver localeResolver(){
+        var slr = new SessionLocaleResolver();
+        slr.setDefaultLocale(Locale.getDefault());
+        slr.setLocaleAttributeName("session.current.locale");
+        slr.setTimeZoneAttributeName("session.current.timezone");
+        return slr;
+    }
+    //Define cual será la variable que cambia el idioma de los textos en este caso es "lang"
+    @Bean
+    public LocaleChangeInterceptor localeChangeInterceptor(){
+        var lci = new LocaleChangeInterceptor();
+        lci.setParamName("lang");
+        return lci;
+        
+    }
+    //Se agrega un interceptor para poder hacer el cambio de idioma de inmediato
+    @Override
+    public void addInterceptors(InterceptorRegistry registro){
+        registro.addInterceptor(localeChangeInterceptor());
+    }
+    
+    //se utilizará para recuperar los textos dentro de java según el idioma
+    @Bean("messageSource")
+    public MessageSource messageSource(){
+        ResourceBundleMessageSource bundleMessageSource
+                = new ResourceBundleMessageSource();
+        bundleMessageSource.setBasename("messages");
+        bundleMessageSource.setDefaultEncoding("UTF-8");
+        return bundleMessageSource;
     }
 }

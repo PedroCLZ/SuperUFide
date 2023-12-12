@@ -25,7 +25,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     }
 
     //Se obtiene una categoria segun el id pasado por parametro
-    @Override
+    @Transactional(readOnly = true)
     public Categoria getCategoria(Categoria categoria) {
         return categoriaDao.findById(categoria.getIdCategoria()).orElse(null);
     }
