@@ -20,26 +20,28 @@
                                                 <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
                                                 <span class="h1 fw-bold mb-0">SuperUfide</span>
                                             </div>
-                                            <p class="mb-5 pb-lg-2" style="color: #393f81;">Nuevo usuario? <a href="#!" style="color: #393f81;">Registrate aqui</a></p>
-                                            <div class="form-outline mb-4">
+                                            <p class="mb-5 pb-lg-2" style="color: #393f81;">Nuevo usuario? <a th:href="@{/registro/nuevo}" >Registrate aqui</a></p>
+                                            <div class="form-outline mb-3">
                                                 <label class="form-label" for="username">Nombre de Usuario</label>
                                                 <input class="form-control form-control-lg" type="text" name="username" id="username"/></div>  
                                             <div class="form-outline mb-4">
                                                 <label class="form-label" for="password">Contraseña</label>
                                                 <input class="form-control form-control-lg" type="password" name="password" id="password"/></div>
-                                            <button class="btn btn-primary" >
-                                                <a th:href="@{/registro/nuevo}" class="btn"><i class="fas fa-user-plus"></i>Registrar</a></button>
-                                            <button class="btn btn-info" >                                        
-                                                <a th:href="@{/registro/recordar}" class="btn"><i class="fas fa-envelope"></i>Recordar</a></button>
-                                            <button class="btn" type="submit">
-                                                <span class="btn"><i class="fas fa-sign-in-alt"></i>
-                                                    Login</span></button>
+                                            <div class="form-check mb-0">    
+                                                <a th:href="@{/registro/recordar}" class="form-check-input me-2"></a>
+                                                <label class="form-check-label" for="form2Example3">
+                                                    Recordar
+                                                </label></div>
+                                            <div class="pt-1 mb-4">
+                                                <button class="btn btn-primary btn-lg btn-block" type="submit">             
+                                                    Login</button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-5 d-none d-md-block">
-                                    <img src="gs://proyectosuperufide.appspot.com/Login/WhatsApp Image 2023-11-23 at 8.15.22 PM.jpeg"
-                                         alt="login form" class="img-fluid" style="border-radius: 0 1rem 1rem 0;" />
+                                    <img src="https://www.thestrongcamp.com/wp-content/uploads/2021/06/login-img.png"
+                                         width="350px" class="img-fluid" style="border-radius: 0 1rem 1rem 0;" />
                                 </div>
                             </div>
                         </div>
