@@ -200,8 +200,8 @@
             </ul>
         </section>
 
-        
-        
+
+
         <section th:fragment="listadoProductoscard" id="productos">
             <div class="container">
                     <div id="resultsBlock"></div></div>
@@ -219,7 +219,7 @@
                                 <input type="hidden" name="texto" th:value="${producto.idProducto}"/>
                                 <input type="hidden" name="texto" th:value="${producto.cantidad}"/>
                                 <button class="btn btn-ligth" id="addCar" 
-                                        name="addCar" onclick="addCard(this.form)" 
+                                        name="addCar" onclick="agregarItem(this.form)" 
                                         type="button"><i class="fas fa-cart-plus"></i></button>
                             </form>                         
                         </div>
@@ -229,11 +229,42 @@
                     [[#{carrito.no_mostrar}]]</div>
             </div>
         </section>
-        
+
+        <!--prubea-->
+        <section th:fragment="listadoProductoscardP" id="productos">
+            <div class="container text-center">
+                <div class="row row-cols-2">
+                    <div id="resultsBlock"></div>
+                </div>
+                <div class="row row-cols-3" th:if="${productos != null and !productos.empty}">
+                    <div class="card" th:each="producto : ${productos}">
+                        <div class="card-body">
+                            <h5 class="card-title">[[${producto.descripcion}]]</h5>
+                            <figure>
+                                <img th:src="@{${producto.rutaImagen}}" height="200"/>
+                                <figcaption>[[${producto.precio}+' ('+${producto.cantidad}+')']]
+                                </figcaption>
+                            </figure>
+                            <form id="addCarForm" th:action="@{/carrito/agregar/{idProducto}}" method="post">
+                                <input type="hidden" name="idProducto" th:value="${producto.idProducto}"/>
+                                <input type="hidden" name="cantidad" th:value="${producto.cantidad}"/>
+                                <button class="btn btn-light" type="submit">
+                                    <i class="fas fa-cart-plus"></i> Agregar al carrito
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${productos == null or productos.empty}">
+                    [[#{carrito.no_mostrar}]]
+                </div>
+            </div>
+        </section>
+
         <section th:fragment="listadoProductosindex" id="productos">
-            <div class="container">
+            <div class="container text-center">
                 <div class="row row-cols-2" >
-                    <h2 class="inline">[[#{index.nuestrosProductos}]]</h2>
+                    <h2 class="inline text-center">[[#{index.nuestrosProductos}]]</h2>
                     <div id="resultsBlock"></div></div>
                 <div class="row row-cols-3" 
                      th:if="${productos != null and !productos.empty}">

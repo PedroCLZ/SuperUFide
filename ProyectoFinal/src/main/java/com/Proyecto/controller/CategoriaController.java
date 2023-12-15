@@ -3,6 +3,7 @@ package com.Proyecto.controller;
 import com.Proyecto.domain.Categoria;
 import com.Proyecto.service.CategoriaService;
 import com.Proyecto.service.FirebaseStorageService;
+import com.Proyecto.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,8 @@ public class CategoriaController {
 
     @Autowired
     private CategoriaService categoriaService;
+    
+   
 
     @GetMapping("/listado")
     public String listado(Model model) {
@@ -27,7 +30,6 @@ public class CategoriaController {
         return "/categoria/listado";
     }
     
-
     @GetMapping("/listado/{idCategoria}")
     public String eliminar(Categoria categoria) {
         categoriaService.delete(categoria);
