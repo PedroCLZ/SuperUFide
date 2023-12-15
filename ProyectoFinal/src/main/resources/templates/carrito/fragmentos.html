@@ -8,12 +8,10 @@
     <body>
         <section th:fragment="listadoProductos" id="productos">
             <div class="container">
-                <div class="row row-cols-2" >
-                    <h2 class="inline">[[#{index.nuestrosProductos}]]</h2>
                     <div id="resultsBlock"></div></div>
-                <div class="row row-cols-3" 
+                <div class="row row-cols-lg-4 justify-content-center" 
                      th:if="${productos != null and !productos.empty}">
-                    <div class="card" th:each="producto : ${productos}">
+                    <div class="card bg-secondary m-3" th:each="producto : ${productos}">
                         <div class="card-body">
                             <h5 class="card-title">[[${producto.descripcion}]]</h5>
                             <figure>
@@ -33,7 +31,6 @@
                 </div>
                 <div th:if="${productos == null or productos.empty}">
                     [[#{carrito.no_mostrar}]]</div>
-            </div>
         </section>
 
         <div th:fragment="verCarrito" th:unless="${#lists.isEmpty(listaItems)}">            
