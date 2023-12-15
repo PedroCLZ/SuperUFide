@@ -1,5 +1,6 @@
 package com.Proyecto.controller;
 
+import com.Proyecto.domain.Categoria;
 import com.Proyecto.domain.Producto;
 import com.Proyecto.service.CategoriaService;
 import com.Proyecto.service.FirebaseStorageService;
@@ -25,6 +26,20 @@ public class ProductoController {
     @GetMapping("/listado")
     public String listado(Model model) {
         var productos = productoService.getProductos(false);
+        model.addAttribute("productos", productos);
+        model.addAttribute("totalProductos", productos.size());
+        
+        var categorias = categoriaService.getCategorias(false);
+        model.addAttribute("categorias", categorias);
+        
+        return "/producto/listado";
+    }
+    
+    @GetMapping("/listado/{idCategoria}")
+    public String listado(Model model, Categoria categoria) {
+        var catego = categoriaService.getCategoria(categoria);
+        //haciendo uso del OneToMany de productos
+        var productos = catego.getProductos();
         model.addAttribute("productos", productos);
         model.addAttribute("totalProductos", productos.size());
         
