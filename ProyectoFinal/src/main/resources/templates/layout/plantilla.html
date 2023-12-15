@@ -33,6 +33,13 @@
                             <li class="nav-item px-5"><a class="nav-link text-white" style="font-size: 28px" th:href="@{/carrito/listado}">Carrito</a>
                             </li>
 
+                            <li class="nav-item px-5 dropdown">
+                                <a class="nav-link text-white" data-bs-toggle="dropdown" style="font-size: 28px" href="#" role="button" aria-expanded="false">[[#{plantilla.idioma}]]</a>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item"  th:href="@{/(lang=es)}">ES</a></li>
+                                    <li><a class="dropdown-item" th:href="@{/(lang=en)}">EN</a></li>
+                                </ul>
+                            </li>
                         </ul>
                         <a th:href="@{/perfil}" class="nav-link text-white" style="align-content: end; font-size: 28px; margin-left: 20px;">
                             <i class="fas fa-user"></i> <!-- Este es un ejemplo utilizando FontAwesome -->
