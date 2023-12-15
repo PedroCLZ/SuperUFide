@@ -1,6 +1,8 @@
 package com.Proyecto.service.impl;
 
+import com.Proyecto.dao.RolDao;
 import com.Proyecto.dao.UsuarioDao;
+import com.Proyecto.domain.Rol;
 import com.Proyecto.domain.Usuario;
 import com.Proyecto.service.UsuarioService;
 import java.util.List;
@@ -11,9 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
-    private UsuarioDao usuarioDao; 
+    private UsuarioDao usuarioDao;
+    @Autowired
+    private RolDao rolDao;
 
-    @Override 
+    @Override
     @Transactional(readOnly = true)
     public List<Usuario> getUsuarios() {
         return usuarioDao.findAll();
@@ -48,17 +52,22 @@ public class UsuarioServiceImpl implements UsuarioService {
     public boolean existeUsuarioPorUsernameOCorreo(String username, String correo) {
         return usuarioDao.existsByUsernameOrCorreo(username, correo);
     }
- 
+
+    @Override
+    @Transactional
+    public void save(Usuario usuario, boolean crearRolUser) {
+        usuario=usuarioDao.save(usuario);
+        if (crearRolUser) {  //Si se está creando el usuario, se crea el rol por defecto "USER"
+            Rol rol = new Rol();
+            rol.setNombre("ROLE_USER");
+            rol.setIdUsuario(usuario.getIdUsuario());
+            rolDao.save(rol);
+        }
+    }
 
     @Override
     @Transactional
     public void delete(Usuario usuario) {
         usuarioDao.delete(usuario);
     }
-
-    @Override
-    public void save(Usuario usuario, boolean crearRolUser) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
-
