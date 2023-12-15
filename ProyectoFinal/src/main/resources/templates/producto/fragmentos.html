@@ -41,26 +41,26 @@
                                     <label for="categoria">Categorias</label>
                                     <select class="form-select" aria-label="Default select example"
                                             name="categoria.idCategoria">
-                                    <option th:each="c : ${categorias}"
-                                            th:value="${c.idCategoria}"
-                                            th:text="${c.descripcion}"></option>
-                                </select>
+                                        <option th:each="c : ${categorias}"
+                                                th:value="${c.idCategoria}"
+                                                th:text="${c.descripcion}"></option>
+                                    </select>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="descripcion">Descripción</label>
                                     <input type="text" class="form-control" name="descripcion" required="true"/>
                                 </div>
-                                 <div class="mb-3">
+                                <div class="mb-3">
                                     <label for="cantidad">Cantidad</label>
                                     <input type="number" class="form-control" name="cantidad" required="true"/>
                                 </div>
-                                
+
                                 <div class="mb-3">
                                     <label for="precio">Precio</label>
                                     <input type="number" class="form-control" name="precio" required="true"/>
                                 </div>
-                               
+
 
                                 <div class="mb-3">
                                     <label for="imagen">[Imagen del Producto</label>
@@ -155,7 +155,7 @@
                                                 <h4>[[#{accion.actualizar}]]</h4>
                                             </div>
                                             <div class="card-body">
-                                                
+
                                                 <div class="mb-3">
                                                     <label for="categoria"> categoria}]]</label>
                                                     <select class="form-select" aria-label="Default select example"
@@ -235,8 +235,8 @@
                 </div>
             </div>
         </section>
-        
-        
+
+
         <!-- 6 Sección para crear el boton de agregar... llamará a una ventana modal-->
         <section th:fragment="categoriasTabs">
             <ul class="nav nav-tabs justify-content-center" style="background-color: #448875;">
@@ -251,7 +251,7 @@
                 </li>
             </ul>
         </section>
-        
+
         <!-- 7  Sección principal para mostrar la informaccion de la entidad producto en card -->
         <section th:fragment="listadoProductoscard" id="productos">
             <div class="row row-cols-6 justify-content-center">
@@ -259,15 +259,17 @@
                     <figure> <img th:src="${p.rutaImagen}" class="card-img-top"
                                   alt="..." height="200"/>
                         <figcaption>[[${p.precio}+' ('+${p.cantidad}+')']]
-                         </figcaption>   
+                        </figcaption>   
                     </figure>
-                        <div class="card-header">
-                            <h4 class="card-title">[[${p.descripcion}]]</h4>
-                        </div>
-                        <div class="card-body">
-                            
-                            <p class="card-text"></p>
-                        </div>
+                    <div class="card-header">
+                        <h4 class="card-title">[[${p.descripcion}]]</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-body d-flex justify-content-center">
+                        <button class="btn btn-success" style="font-size: 20px; background-color: #448875">Comprar</button>
+                    </div>
 
                 </div>
             </div>
