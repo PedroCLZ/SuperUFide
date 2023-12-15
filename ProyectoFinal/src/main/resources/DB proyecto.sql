@@ -21,7 +21,7 @@ create table superufide.producto (
   id_producto INT NOT NULL AUTO_INCREMENT,
   id_categoria INT NOT NULL,
   descripcion VARCHAR(100) NOT NULL,  
-  cantidad INT NOT NULL, 
+  cantidad INT NOT NULL,  
   precio double, 
   ruta_imagen varchar(1024),
   activo bool,
