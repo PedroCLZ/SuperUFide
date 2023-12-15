@@ -175,5 +175,28 @@
                 </div>
             </div>
         </section>
+        
+        <!-- 7  Sección principal para mostrar la informaccion de la entidad de categoria en card -->
+        <section th:fragment="listadoCategoriascard" id="categorias">
+            <div class="row row-cols-6 justify-content-center">
+                <div class="card rounded mr-4" th:each="p : ${categorias}">
+                    <figure> <img th:src="${p.rutaImagen}" class="card-img-top"
+                                  alt="..." height="200"/>
+                        <figcaption>[[${p.precio}+' ('+${p.cantidad}+')']]
+                        </figcaption>   
+                    </figure>
+                    <div class="card-header">
+                        <h4 class="card-title">[[${p.descripcion}]]</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"></p>
+                    </div>
+                    <div class="card-body d-flex justify-content-center">
+                        <button class="btn btn-success" style="font-size: 20px; background-color: #448875">Comprar</button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
     </body>
 </html>

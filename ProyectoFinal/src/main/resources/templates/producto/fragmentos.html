@@ -252,26 +252,64 @@
             </ul>
         </section>
 
-        <!-- 7  Sección principal para mostrar la informaccion de la entidad producto en card -->
+        
+        
         <section th:fragment="listadoProductoscard" id="productos">
-            <div class="row row-cols-6 justify-content-center">
-                <div class="card rounded mr-4" th:each="p : ${productos}">
-                    <figure> <img th:src="${p.rutaImagen}" class="card-img-top"
-                                  alt="..." height="200"/>
-                        <figcaption>[[${p.precio}+' ('+${p.cantidad}+')']]
-                        </figcaption>   
-                    </figure>
-                    <div class="card-header">
-                        <h4 class="card-title">[[${p.descripcion}]]</h4>
+            <div class="container text-center">
+                <div class="row row-cols-2" >
+                    <div id="resultsBlock"></div></div>
+                <div class="row row-cols-3" 
+                     th:if="${productos != null and !productos.empty}">
+                    <div class="card" th:each="producto : ${productos}">
+                        <div class="card-body">
+                            <h5 class="card-title">[[${producto.descripcion}]]</h5>
+                            <figure>
+                                <img th:src="@{${producto.rutaImagen}}" height="200"/>
+                                <figcaption>[[${producto.precio}+' ('+${producto.cantidad}+')']]
+                                </figcaption>
+                            </figure>
+                            <form>
+                                <input type="hidden" name="texto" th:value="${producto.idProducto}"/>
+                                <input type="hidden" name="texto" th:value="${producto.cantidad}"/>
+                                <button class="btn btn-ligth" id="addCar" 
+                                        name="addCar" onclick="addCard(this.form)" 
+                                        type="button"><i class="fas fa-cart-plus"></i></button>
+                            </form>                         
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <p class="card-text"></p>
-                    </div>
-                    <div class="card-body d-flex justify-content-center">
-                        <button class="btn btn-success" style="font-size: 20px; background-color: #448875">Comprar</button>
-                    </div>
-
                 </div>
+                <div th:if="${productos == null or productos.empty}">
+                    [[#{carrito.no_mostrar}]]</div>
+            </div>
+        </section>
+        
+        <section th:fragment="listadoProductosindex" id="productos">
+            <div class="container">
+                <div class="row row-cols-2" >
+                    <h2 class="inline">[[#{index.nuestrosProductos}]]</h2>
+                    <div id="resultsBlock"></div></div>
+                <div class="row row-cols-3" 
+                     th:if="${productos != null and !productos.empty}">
+                    <div class="card" th:each="producto : ${productos}">
+                        <div class="card-body">
+                            <h5 class="card-title">[[${producto.descripcion}]]</h5>
+                            <figure>
+                                <img th:src="@{${producto.rutaImagen}}" height="200"/>
+                                <figcaption>[[${producto.precio}+' ('+${producto.cantidad}+')']]
+                                </figcaption>
+                            </figure>
+                            <form>
+                                <input type="hidden" name="texto" th:value="${producto.idProducto}"/>
+                                <input type="hidden" name="texto" th:value="${producto.cantidad}"/>
+                                <button class="btn btn-ligth" id="addCar" 
+                                        name="addCar" onclick="addCard(this.form)" 
+                                        type="button"><i class="fas fa-cart-plus"></i></button>
+                            </form>                         
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${productos == null or productos.empty}">
+                    [[#{carrito.no_mostrar}]]</div>
             </div>
         </section>
     </body>
